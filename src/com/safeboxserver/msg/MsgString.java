@@ -17,9 +17,11 @@ public class MsgString {
 	// URL on HttpClientToServer to Romote DB
 	public final static String PARAMS_USERNAME = "PARAMS_USERNAME";
 	public final static String PARAMS_PASSWORD = "PARAMS_PASSWORD";
+	public final static String PARAMS_EXCEPTION = "PARAMS_EXCEPTION";
 	public final static String PARAMS_ACTION = "PARAMS_ACTION";
 	public final static String PARAMS_QUERY = "PARAMS_QUERY";
 	public final static String PARAMS_INSERT = "PARAMS_INSERT";
+	public final static String PARAMS_SEND_EXCEPTION = "PARAMS_SEND_EXCEPTION";
 	
 	public final static String SUCCESS = "SUCCESS";
 	public final static String FAILED = "FAILED";

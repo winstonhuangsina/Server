@@ -1,15 +1,25 @@
 package com.bao;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.safeboxserver.msg.MsgString;
 
@@ -27,10 +37,15 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = resp.getWriter();
 		String action = req.getParameter(MsgString.PARAMS_ACTION);
-		String username = req.getParameter(MsgString.PARAMS_USERNAME);
-		String password = req.getParameter(MsgString.PARAMS_PASSWORD);
-		System.out.println("=========username========"+username);
-		System.out.println("=========password========"+password);
+		String username = "";
+		String password = "";
+		if(action.equals(MsgString.PARAMS_QUERY) || action.equals(MsgString.PARAMS_INSERT)){
+			username = req.getParameter(MsgString.PARAMS_USERNAME);
+			password = req.getParameter(MsgString.PARAMS_PASSWORD);
+			System.out.println("=========username========"+username);
+			System.out.println("=========password========"+password);
+		}
+		
 		
 		/*resp.setContentType("text/html");
 		  req.setCharacterEncoding("UTF-8");
@@ -53,7 +68,19 @@ public class LoginServlet extends HttpServlet {
 			}else{
 				out.println(MsgString.FAILED);
 			}
-		}
+		}/*else if(action.equals(MsgString.PARAMS_SEND_EXCEPTION)){
+			if(dbImp.insertSql(username, password)){
+				out.println(MsgString.SUCCESS);
+			}else{
+				out.println(MsgString.FAILED);
+			}
+			System.out.println("dopost params exception: " + req.getParameter(MsgString.PARAMS_EXCEPTION));
+			out.println(MsgString.SUCCESS);
+		}*/
+		
+		
+		
+		
 		
 		//EncryptDecrypt crypt = new EncryptDecrypt();
 		
@@ -118,7 +145,5 @@ public class LoginServlet extends HttpServlet {
 		}*/
 		
 	}
-	
-	
 
 }
